@@ -7,45 +7,61 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.0/jszip.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .fade-in {
+      animation: fadeIn 1.5s ease-in forwards;
+    }
+    .slide-up {
+      animation: slideUp 1.2s ease-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col">
-
+<body class="bg-gray-950 text-white min-h-screen flex flex-col font-sans">
   <!-- Navbar -->
-  <nav class="bg-white shadow-md p-6 flex justify-between items-center">
-    <div class="text-2xl font-bold text-blue-600">
-      FileHandler<span class="text-gray-800">.com</span>
+  <nav class="bg-gray-900 shadow-md p-6 flex justify-between items-center fade-in">
+    <div class="text-2xl font-bold text-blue-400">
+      SnapSorter<span class="text-white">.com</span>
     </div>
     <div class="space-x-4">
-      <a href="index.html" class="text-blue-600 hover:underline">Home</a>
+      <a href="index.html" class="text-blue-400 hover:underline">Home</a>
     </div>
   </nav>
 
   <!-- Main Content -->
-  <main class="flex-grow p-8">
+  <main class="flex-grow p-8 slide-up">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      
+
       <!-- Upload Form Section -->
-      <div class="bg-white p-6 rounded shadow-md text-center">
-        <h1 class="text-3xl font-bold mb-4">🎉 Welcome to the SnapSorter! 🎉</h1>
+      <div class="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+        <h1 class="text-3xl font-bold mb-4 text-blue-400">🎉 Welcome to the SnapSorter! 🎉</h1>
         <h2 class="text-xl font-bold mb-4">Upload Files</h2>
         <input type="file" id="file-upload" multiple class="hidden">
         <button onclick="document.getElementById('file-upload').click()"
-        class="flex flex-col items-center px-4 py-6 bg-white text-blue-600 rounded-lg shadow-lg tracking-wide uppercase border border-blue-600 cursor-pointer hover:bg-blue-600 hover:text-white w-full text-center">
+        class="flex flex-col items-center px-4 py-6 bg-gray-700 text-blue-400 rounded-lg shadow-lg tracking-wide uppercase border border-blue-500 cursor-pointer hover:bg-blue-600 hover:text-white w-full">
         <svg class="w-8 h-8 mx-auto" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
           <path d="M16.88 9.94a1.5 1.5 0 00-1.32-.94h-1.3V5.5A1.5 1.5 0 0012.76 4h-1.52A1.5 1.5 0 009.74 5.5V9H8.43a1.5 1.5 0 00-1.32.94l-1.9 5a1.5 1.5 0 001.32 2.06h10.66a1.5 1.5 0 001.32-2.06l-1.9-5zM12 9h-2V5.5a.5.5 0 01.5-.5h1a.5.5 0 01.5.5V9z"/>
-        </svg>  
+        </svg>
           Choose Files
         </button>
-        <button id="uploadBtn" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold">
+        <button id="uploadBtn" class="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition duration-300 ease-in-out">
           Organize & Download
         </button>
-        <p id="progress" class="mt-4 text-sm text-gray-600"></p>
-        <div id="output" class="mt-2 text-green-700 font-semibold"></div>
+        <p id="progress" class="mt-4 text-sm text-gray-300"></p>
+        <div id="output" class="mt-2 text-green-400 font-semibold"></div>
       </div>
 
       <!-- File Preview Section -->
-      <div class="bg-white p-6 rounded shadow-md">
-        <h2 class="text-2xl font-bold mb-4">📂 File Preview</h2>
+      <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-bold mb-4 text-blue-300">📂 File Preview</h2>
         <div id="previewArea" class="grid grid-cols-2 gap-4"></div>
       </div>
     </div>
@@ -64,7 +80,7 @@
         const reader = new FileReader();
         reader.onload = (e) => {
           const div = document.createElement('div');
-          div.className = "bg-gray-100 p-2 rounded";
+          div.className = "bg-gray-700 p-2 rounded shadow-md";
           if (file.type.startsWith('image/')) {
             div.innerHTML = `<img src="${e.target.result}" class="w-full h-32 object-cover rounded"/>`;
           } else if (file.type.startsWith('video/')) {
@@ -115,36 +131,30 @@
     });
   </script>
 
-<footer class="bg-gray-900 text-white py-8 px-6 md:px-20">
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-8 px-6 md:px-20 fade-in">
     <div class="flex flex-col md:flex-row items-center justify-between">
-
-      <!-- Logo -->
-      <div class="mb-4 md:mb-0">
-        <img src="Screenshot 2025-06-01 015822.png" alt="Snapsorter Logo" class="w-40">
-      </div>
-
+     
       <!-- Social Icons -->
       <div class="flex space-x-4 mb-4 md:mb-0">
-        <a href="https://facebook.com" target="_blank" class="text-white text-xl hover:text-blue-500">
+        <a href="https://facebook.com" target="_blank" class="text-white text-xl hover:text-blue-500 transition-transform transform hover:scale-110">
           <i class="fab fa-facebook-f"></i>
         </a>
-        <a href="https://github.com" target="_blank" class="text-white text-xl hover:text-gray-400">
+        <a href="https://github.com" target="_blank" class="text-white text-xl hover:text-gray-400 transition-transform transform hover:scale-110">
           <i class="fab fa-github"></i>
         </a>
-        <a href="https://instagram.com" target="_blank" class="text-white text-xl hover:text-pink-500">
+        <a href="https://instagram.com" target="_blank" class="text-white text-xl hover:text-pink-500 transition-transform transform hover:scale-110">
           <i class="fab fa-instagram"></i>
         </a>
-        <a href="https://linkedin.com" target="_blank" class="text-white text-xl hover:text-blue-300">
+        <a href="https://linkedin.com" target="_blank" class="text-white text-xl hover:text-blue-300 transition-transform transform hover:scale-110">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </div>
       <!-- Copyright -->
-      <div class="text-sm text-gray-400">
+      <div class="text-sm text-gray-400 text-center">
         © 2025 Snapsorter. All rights reserved.
       </div>
     </div>
   </footer>
-
 </body>
-  
 </html>
